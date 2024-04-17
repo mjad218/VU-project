@@ -7,16 +7,18 @@ export const SignUpPage = () => {
   return (
     <div className="flex flex-col lg:flex-row">
       <div className="lg:basis-1/2 h-screen">
-        <TextureBackground className="w-full h-full flex flex-col gap-7 py-3 px-5">
-          <div className="">
-            <h1 className="m-0 p-0 text-3xl font-bold text-white font-title">
-              Greetings...
-            </h1>
-            <p className="text-sm text-white font-title">
-              to whom do I owe the pleasure?
-            </p>
+        <TextureBackground className="w-full h-full flex flex-col gap-7 py-3 px-5  items-center justify-center">
+          <div className="max-w-[450px] flex flex-col gap-7">
+            <div className="">
+              <h1 className="m-0 p-0 text-3xl font-bold text-white font-title">
+                Greetings...
+              </h1>
+              <p className="text-sm text-white font-title">
+                to whom do I owe the pleasure?
+              </p>
+            </div>
+            <SignUpForm />
           </div>
-          <SignUpForm />
         </TextureBackground>
       </div>
       <div className=" bg-no-repeat bg-cover bg-center lg:basis-1/2 h-screen bg-signBg ">
