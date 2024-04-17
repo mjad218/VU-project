@@ -6,6 +6,15 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --beige: #A27B54;
+  --red: #70361A;
+  --red-light: #DC6F4E;
+  --rose: #E6BBAA;
+  --green: #B2AC88;
+  --grey: #555555;
+  --brown: #3F3939;
+  --white: #E4E0C7;
+  --coolGrey: #424844
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -21,6 +30,7 @@ body {
   /* background: linear-gradient(to bottom,
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb)); */
+  font-family: var(--normal-font);
 }
 
 @layer utilities {

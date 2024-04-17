@@ -16,6 +16,10 @@ const config: Config = {
         signBg: "url('/assets/login/man.png')",
         texture: "url('/assets/login/texture.jpeg')",
       },
+      fontFamily: {
+        sans: "var(--normal-font)",
+        title: "var(--title-font)",
+      },
     },
   },
   plugins: [],
