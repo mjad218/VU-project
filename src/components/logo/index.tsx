@@ -8,7 +8,7 @@ export const Logo = (props: IProps) => {
       xmlns="http://www.w3.org/2000/svg"
       id="Layer_1"
       data-name="Layer 1"
-      fill="#3f3939"
+      fill="currentColor"
       viewBox="0 0 1285.18 881.07"
       className={props.className}
     >

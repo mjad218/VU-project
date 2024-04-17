@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/button";
+import { CustomButton } from "@/components/custom-button";
 import { FormControl } from "@/components/form-control";
 import { Input } from "@/components/input";
 import { Logo } from "@/components/logo";
@@ -31,9 +32,9 @@ export const LoginForm = () => {
       <p className="w-full text-sm font-normal text-[var(--red)]">
         forget our secret word?
       </p>
-      <Button className="rounded-lg py-6  px-9 bg-[var(--red-light)] outline outline-[1px] -outline-offset-8 outline-[var(--brown)] text-white">
+      <CustomButton className="rounded-lg py-6  px-9 bg-[var(--red-light)] outline outline-[1px] -outline-offset-8 outline-[var(--brown)] text-white">
         Login
-      </Button>
+      </CustomButton>
     </div>
   );
 };
