@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Open_Sans } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/components/cart/context";
 
 const titleFont = Playfair_Display({
   subsets: ["latin"],
@@ -26,7 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={className}>{children}</body>
+      <body className={className}>
+        <CartProvider>{children}</CartProvider>
+      </body>
     </html>
   );
 }
