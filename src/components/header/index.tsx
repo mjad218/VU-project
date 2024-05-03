@@ -1,6 +1,10 @@
 import { IoBagOutline } from "react-icons/io5";
 import { Logo } from "../logo";
 import Link from "next/link";
+import { Navigation } from "./navigation";
+import { SearchBox } from "../search-box";
+import { Popover, PopoverContent, PopoverTrigger } from "../popover";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 export const Header = () => {
   return (
@@ -9,9 +13,23 @@ export const Header = () => {
         <Logo className=" text-white w-16" />
       </Link>
 
-      <Link href={"/cart"}>
-        <IoBagOutline />
-      </Link>
+      <div className="flex gap-10 items-center">
+        <div className="block  lg:hidden">
+          <Popover>
+            <PopoverTrigger>
+              <FaMagnifyingGlass className="text-[var(--white)] w-5 h-auto block" />
+            </PopoverTrigger>
+            <PopoverContent className="bg-[var(--brown)]">
+              <SearchBox />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className=" hidden lg:block">
+          <SearchBox />
+        </div>
+        <div className="h-6 w-[1px] bg-[var(--white)]"></div>
+        <Navigation />
+      </div>
     </header>
   );
 };
