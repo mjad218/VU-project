@@ -2,13 +2,21 @@
 import { Product } from "@/types/product";
 import { CustomButton } from "../custom-button";
 import { useCart } from "../cart/context";
+import { useMemo } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type IProps = {
   product: Product | null;
 };
 
 export const ProductDetails = (props: IProps) => {
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
+  const router = useRouter();
+  const isInTheCart = useMemo(
+    () => cartItems.find((item) => item?.product?.id === props.product?.id),
+    [cartItems, props.product]
+  );
 
   const handleAddToCart = () => {
     if (props.product) addToCart(props.product);
@@ -26,7 +34,14 @@ export const ProductDetails = (props: IProps) => {
       <p className=" text-base text-[--brown] text-center ">
         {props.product?.description}
       </p>
-      <CustomButton onClick={handleAddToCart}>Add to Bag</CustomButton>
+      {!isInTheCart && (
+        <CustomButton onClick={handleAddToCart}>Add to Bag</CustomButton>
+      )}
+      {isInTheCart && (
+        <CustomButton onClick={() => router.push("/cart")}>
+          Go to Cart
+        </CustomButton>
+      )}
     </div>
   );
 };

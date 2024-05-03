@@ -25,50 +25,44 @@ export const CartItemView = ({ item }: Props) => {
   };
 
   return (
-    <div>
-      {/* Product Image and Title */}
-      <div>
-        <Image
-          src={item.product.imagesUrls[0]}
-          alt={item.product.name}
-          width={150}
-          height={150}
-        />
-        <h2>{item.product.name}</h2>
-      </div>
-      <div>
-        <div>
-          <h5>${(item.product.price * item.quantity).toFixed(2)}</h5>
-          <div>
-            {/* Icreasing/Deacreasing Product Quantity Button  */}
-            <div>
-              <Button
-                aria-label="decrease"
-                onClick={() => {
-                  handleQuantityChange(item.quantity - 1);
-                }}
-              >
-                <FaMinus />
-              </Button>
-              <h6>&nbsp;{item.quantity}&nbsp;</h6>
-              <Button
-                aria-label="increase"
-                onClick={() => {
-                  handleQuantityChange(item.quantity + 1);
-                }}
-              >
-                <IoIosAdd />
-              </Button>
-            </div>
-          </div>
+    <div className="flex gap-6">
+      <Image
+        src={item.product.imagesUrls[0]}
+        alt={item.product.name}
+        width={150}
+        height={150}
+        className=" w-32 h-32 rounded-md block"
+      />
+      <div className="flex flex-col gap-3">
+        <h2 className="font-title text-lg font-bold">{item.product.name}</h2>
+
+        <h5>${(item.product.price * item.quantity).toFixed(2)}</h5>
+        <div className="flex gap-2 items-center">
+          <span className="text-sm">Quantity</span>
+          <Button
+            className="bg-[var(--rose)]"
+            aria-label="decrease"
+            onClick={() => {
+              handleQuantityChange(item.quantity - 1);
+            }}
+          >
+            <FaMinus />
+          </Button>
+          <h6>&nbsp;{item.quantity}&nbsp;</h6>
+          <Button
+            className="bg-[var(--rose)]"
+            aria-label="increase"
+            onClick={() => {
+              handleQuantityChange(item.quantity + 1);
+            }}
+          >
+            <IoIosAdd />
+          </Button>
         </div>
       </div>
-      {/* Removing Product From Cart */}
-      <div>
-        <Button aria-label="remove" onClick={handleRemoveClick}>
-          <RiDeleteBin6Line />
-        </Button>
-      </div>
+      <Button aria-label="remove" onClick={handleRemoveClick}>
+        <RiDeleteBin6Line className="w-5 h-auto text-red-600" />
+      </Button>
     </div>
   );
 };
