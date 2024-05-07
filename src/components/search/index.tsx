@@ -15,13 +15,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "../pagination";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type IProps = {
   products: Product[];
 };
 export const SearchPage = (props: IProps) => {
-  const pathname = usePathname();
   const params = useSearchParams();
   const router = useRouter();
   const page = Number(params.get("page")) ?? 1;

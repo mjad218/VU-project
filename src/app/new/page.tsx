@@ -8,7 +8,7 @@ const CreateProduct = async () => {
   return (
     <div>
       <Header />
-      <ProductForm />
+      <ProductForm tags={tags ?? []} />
       <Footer />
     </div>
   );

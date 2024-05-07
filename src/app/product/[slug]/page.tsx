@@ -19,6 +19,7 @@ const ProductServerPage = async (props: IProps) => {
     quantity: 5,
     imagesUrls: ["/assets/login/man.png"],
   };
+
   return (
     <div className="flex flex-col lg:flex-row">
       <div className="lg:basis-1/2 h-screen">

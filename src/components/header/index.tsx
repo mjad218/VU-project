@@ -5,10 +5,19 @@ import { Navigation } from "./navigation";
 import { SearchBox } from "../search-box";
 import { Popover, PopoverContent, PopoverTrigger } from "../popover";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { cn } from "@/utils";
 
-export const Header = () => {
+type IProps = {
+  className?: string | undefined;
+};
+export const Header = (props: IProps) => {
   return (
-    <header className="flex justify-between w-full h-24 bg-[var(--brown)] px-10 items-center">
+    <header
+      className={cn(
+        "flex justify-between w-full h-24 bg-[var(--brown)] px-10 items-center relative z-10",
+        props.className
+      )}
+    >
       <Link href={"/"}>
         <Logo className=" text-white w-16" />
       </Link>
