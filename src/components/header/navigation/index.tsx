@@ -6,7 +6,7 @@ import { CiUser } from "react-icons/ci";
 import { IoBagOutline } from "react-icons/io5";
 
 export const Navigation = () => {
-  const user = useCurrentUser();
+  const { user } = useCurrentUser();
   const isLoggedin = !!user;
 
   if (isLoggedin)

@@ -4,6 +4,9 @@ export const login = async (email: string, password: string) => {
   try {
     const req = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         email,
         password,
@@ -11,7 +14,9 @@ export const login = async (email: string, password: string) => {
     });
     if (!req.ok) throw "not ok response";
     const _res = await req.json();
-    return req.ok;
+
+    const token = _res?.data?.token;
+    return token;
   } catch (error) {
     return true;
   }

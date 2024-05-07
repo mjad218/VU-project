@@ -9,11 +9,13 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { CustomButton } from "../custom-button";
+import { API_URL } from "@/constants";
+import { useCart } from "../cart/context";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-
+  const { address } = useCart();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (event: FormEvent) => {
@@ -32,18 +34,22 @@ const CheckoutForm = () => {
     }
 
     // Create the PaymentIntent and obtain clientSecret from your server endpoint
-    const res = await fetch("/create-intent", {
+    const res = await fetch(`${API_URL}/orders`, {
       method: "POST",
+      body: JSON.stringify({
+        addressId: address?.id ?? 1,
+      }),
     });
 
-    const { client_secret: clientSecret } = await res.json();
+    const { clientSecret, order } = await res.json();
+
     if (!stripe) return;
     const { error } = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "https://example.com/order/123/complete",
+        return_url: "http://127.0.0.1:3000/",
       },
     });
 

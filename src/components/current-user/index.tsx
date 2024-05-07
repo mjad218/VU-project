@@ -12,11 +12,15 @@ import {
 interface UserContextValue {
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
+  accessToken: string | null;
+  setAccessToken: Dispatch<SetStateAction<string | null>>;
 }
 
 const UserContext = createContext<UserContextValue>({
   user: null,
   setUser: () => {},
+  accessToken: "",
+  setAccessToken: () => {},
 });
 
 export const useCurrentUser = () => {
@@ -25,13 +29,19 @@ export const useCurrentUser = () => {
 
 type IProps = {
   user: User | null;
+  accessToken?: string | null;
   children: ReactNode;
 };
 export const CurrentUserProvider = (props: IProps) => {
   const [user, setUser] = useState<User | null>(props.user);
+  const [accessToken, setAccessToken] = useState<string | null>(
+    props.accessToken ?? ""
+  );
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider
+      value={{ user, setUser, accessToken, setAccessToken }}
+    >
       {props.children}
     </UserContext.Provider>
   );

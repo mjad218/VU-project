@@ -4,6 +4,10 @@ import "./globals.css";
 import { CartProvider } from "@/components/cart/context";
 import { CurrentUserProvider } from "@/components/current-user";
 import { getCurrentUser } from "@/services/auth/current-user";
+import { getCookie } from "@/actions";
+import { ACCESS_TOKEN_COOKIE_KEY } from "@/constants";
+import { cookies } from "next/headers";
+import { User } from "@/types/user";
 
 const titleFont = Playfair_Display({
   subsets: ["latin"],
@@ -27,11 +31,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getCurrentUser();
+  const accessToken = cookies().get(ACCESS_TOKEN_COOKIE_KEY)?.value ?? null;
+  const user = (await getCurrentUser(accessToken ?? "")) as User;
   return (
     <html lang="en">
       <body className={className}>
-        <CurrentUserProvider user={user}>
+        <CurrentUserProvider user={user} accessToken={accessToken}>
           <CartProvider>{children}</CartProvider>
         </CurrentUserProvider>
       </body>

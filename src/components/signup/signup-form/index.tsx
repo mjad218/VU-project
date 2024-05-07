@@ -39,8 +39,8 @@ export const SignUpForm = () => {
         setError(parseRes.error);
         throw "Validation Error";
       }
-      const err = await signUp(email, name, password, phoneNumber);
-      if (!err) router.push("/");
+      const token = await signUp(email, name, password, phoneNumber);
+      if (token) router.push("/login");
     } catch (error) {}
   };
   return (

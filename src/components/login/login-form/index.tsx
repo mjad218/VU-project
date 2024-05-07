@@ -1,8 +1,11 @@
 "use client";
+import { setCookie } from "@/actions";
+import { useCurrentUser } from "@/components/current-user";
 import { CustomButton } from "@/components/custom-button";
 import { FormControl } from "@/components/form-control";
 import { Input } from "@/components/input";
 import { Logo } from "@/components/logo";
+import { ACCESS_TOKEN_COOKIE_KEY } from "@/constants";
 import { login } from "@/services/auth/login";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -25,11 +28,14 @@ export const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const router = useRouter();
+  const { setAccessToken } = useCurrentUser();
   const handleLogin = async () => {
     try {
-      const err = await login(email, password);
-      setError(err);
-      if (!err) router.push("/");
+      const token = await login(email, password);
+      setCookie(ACCESS_TOKEN_COOKIE_KEY, token);
+      setAccessToken(token);
+      setError(!token);
+      if (token) router.push("/");
     } catch (error) {}
   };
   return (
