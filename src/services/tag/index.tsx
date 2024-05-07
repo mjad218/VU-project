@@ -8,7 +8,10 @@ export const getTags = async () => {
     });
     if (!req.ok) throw "not ok response";
     const res = await req.json();
-    return res as Tag[];
+    console.log({
+      res,
+    });
+    return res?.data?.tags as Tag[];
   } catch (error) {
     return null;
   }

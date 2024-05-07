@@ -13,6 +13,7 @@ import { Tag } from "@/types/tag";
 import { Product } from "@/types/product";
 import { API_URL } from "@/constants";
 import { useRouter } from "next/navigation";
+import { useCurrentUser } from "../current-user";
 
 const AVAILABLE_SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
 
@@ -32,31 +33,37 @@ export const ProductForm = (props: IProps) => {
     setImagesSrc((prev) => [...prev, URL.createObjectURL(file)]);
     console.log(URL.createObjectURL(file));
   };
-
+  const { accessToken } = useCurrentUser();
   const router = useRouter();
   const handleCreate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //@ts-ignore
-    const formData = new FormData(e?.target);
-    const product = {
-      name,
-      price: price.toString(),
-      description,
-      quantity: quantity.toString(),
-      sizes: JSON.stringify(sizes),
-      tagsIds: JSON.stringify(tags),
-    };
-    Object.entries(product).map(([key, val]) => formData.set(key, val));
-    images.forEach((img) => formData.append("photos", img));
-
     try {
+      const formData = new FormData();
+      const product = {
+        name: name ?? "",
+        price: (price ?? "").toString(),
+        description: description ?? "",
+        quantity: (quantity ?? "").toString(),
+        sizes: JSON.stringify(sizes ?? []),
+        tagsIds: JSON.stringify(tags ?? []),
+      };
+      Object.entries(product).forEach(([key, val]) =>
+        formData.append(key, val)
+      );
+      formData.append("photos", JSON.stringify(images));
       const req = await fetch(`${API_URL}/products`, {
         method: "POST",
         body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
       if (!req.ok) throw "FAILED ";
       const p = (await req.json()) as Product;
-
+      console.log({
+        p,
+      });
       if (p?.id) router.push(`/product/${p.id}`);
     } catch (error) {}
   };

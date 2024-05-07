@@ -3,7 +3,10 @@ import { Playfair_Display, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/cart/context";
 import { CurrentUserProvider } from "@/components/current-user";
-import { getCurrentUser } from "@/services/auth/current-user";
+import {
+  getCurrentUser,
+  setCurrentUserAdmin,
+} from "@/services/auth/current-user";
 import { getCookie } from "@/actions";
 import { ACCESS_TOKEN_COOKIE_KEY } from "@/constants";
 import { cookies } from "next/headers";
@@ -33,6 +36,7 @@ export default async function RootLayout({
 }>) {
   const accessToken = cookies().get(ACCESS_TOKEN_COOKIE_KEY)?.value ?? null;
   const user = (await getCurrentUser(accessToken ?? "")) as User;
+  if (user) setCurrentUserAdmin(accessToken ?? "", user?.id);
   return (
     <html lang="en">
       <body className={className}>

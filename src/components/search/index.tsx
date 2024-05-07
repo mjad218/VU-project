@@ -24,7 +24,9 @@ export const SearchPage = (props: IProps) => {
   const params = useSearchParams();
   const router = useRouter();
   const page = Number(params.get("page")) ?? 1;
-  const products = Array(3)
+  const products = props.products ?? [];
+
+  Array(3)
     .fill(0)
     .map(() => product);
   return (

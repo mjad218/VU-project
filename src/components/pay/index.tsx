@@ -11,12 +11,14 @@ import {
 import { CustomButton } from "../custom-button";
 import { API_URL } from "@/constants";
 import { useCart } from "../cart/context";
+import { useCurrentUser } from "../current-user";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const { address } = useCart();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { accessToken } = useCurrentUser();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -39,6 +41,10 @@ const CheckoutForm = () => {
       body: JSON.stringify({
         addressId: address?.id ?? 1,
       }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
     });
 
     const { clientSecret, order } = await res.json();
