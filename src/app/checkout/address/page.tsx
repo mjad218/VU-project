@@ -1,18 +1,20 @@
+import { AddressForm } from "@/components/address-form";
 import { CartView } from "@/components/cart/CartView";
-import { TotalPrice } from "@/components/cart/totat-price";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import React from "react";
 
-const ShoppingCart = () => {
+const AddressPage = () => {
   return (
     <div>
       <Header />
+
       <CartView>
-        <TotalPrice />
+        <AddressForm />
       </CartView>
       <Footer />
     </div>
   );
 };
 
-export default ShoppingCart;
+export default AddressPage;

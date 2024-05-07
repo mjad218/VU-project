@@ -1,4 +1,5 @@
 "use client";
+import { Address } from "@/types/address";
 import { CartItem, Product } from "@/types/product";
 import { createContext, useContext, useState } from "react";
 
@@ -9,6 +10,8 @@ interface CartContextValue {
   updateCartItemQuantity: (productId: number, quantity: number) => void;
   cartTotal: number;
   cartCount: number;
+  address: Address | null;
+  setAddress: (a: Address) => void;
 }
 
 const CartContext = createContext<CartContextValue>({
@@ -18,6 +21,8 @@ const CartContext = createContext<CartContextValue>({
   updateCartItemQuantity: () => {},
   cartTotal: 0,
   cartCount: 0,
+  address: null,
+  setAddress: () => {},
 });
 
 export const useCart = () => {
@@ -30,6 +35,7 @@ interface Props {
 
 export const CartProvider = ({ children }: Props) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [address, setAddress] = useState<Address | null>(null);
 
   const addToCart = (product: Product) => {
     const existingCartItemIndex = cartItems.findIndex(
@@ -88,6 +94,8 @@ export const CartProvider = ({ children }: Props) => {
         updateCartItemQuantity,
         cartTotal,
         cartCount,
+        address,
+        setAddress,
       }}
     >
       {children}

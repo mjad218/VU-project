@@ -1,5 +1,6 @@
 import { Product } from "@/types/product";
 import Image from "next/image";
+import Link from "next/link";
 
 type IProps = {
   product: Product;
@@ -16,7 +17,9 @@ export const ProductItem = (props: IProps) => {
       />
       <div className="px-3">
         <h2 className="font-title text-[var(--brown)] font-bold text-2xl m-0 pt-0 pb-1">
-          {props.product?.name}
+          <Link href={`/product/${props?.product?.id}`}>
+            {props.product?.name}
+          </Link>
         </h2>
       </div>
     </div>
