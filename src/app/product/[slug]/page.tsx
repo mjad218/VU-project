@@ -9,16 +9,16 @@ type IProps = {
   };
 };
 const ProductServerPage = async (props: IProps) => {
-  //   const product = await getProduct(props?.params?.slug ?? "");
-  let product: Product = {
-    id: 0,
-    name: "“The Blossom Reverie” ",
-    price: 50000,
-    description:
-      "time stands still. Each thread in this ensemble weaves a delicate story, and every button holds a secret. The jacket, adorned with embroidered blooms, whispers of romance. The trousers, tailored to perfection, rustle like fallen leaves. And the pocket square? It’s a pressed flower, forever preserved in this poetic reverie.",
-    quantity: 5,
-    imagesUrls: ["/assets/login/man.png"],
-  };
+  const product = await getProduct(props?.params?.slug ?? "");
+  // let product: Product = {
+  //   id: 0,
+  //   name: "“The Blossom Reverie” ",
+  //   price: 50000,
+  //   description:
+  //     "time stands still. Each thread in this ensemble weaves a delicate story, and every button holds a secret. The jacket, adorned with embroidered blooms, whispers of romance. The trousers, tailored to perfection, rustle like fallen leaves. And the pocket square? It’s a pressed flower, forever preserved in this poetic reverie.",
+  //   quantity: 5,
+  //   imagesUrls: ["/assets/login/man.png"],
+  // };
 
   return (
     <div className="flex flex-col lg:flex-row">
