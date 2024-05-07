@@ -3,7 +3,6 @@ import { Product } from "@/types/product";
 import { CustomButton } from "../custom-button";
 import { useCart } from "../cart/context";
 import { useMemo } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 type IProps = {
